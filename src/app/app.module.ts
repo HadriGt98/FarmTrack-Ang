@@ -12,6 +12,8 @@ import { MaterialModule } from '../material.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './register/register.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent,
     LoginComponent,
     VehicleListComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,14 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function tokenGetter() {
+          return localStorage.getItem('token');
+          },
+        }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
