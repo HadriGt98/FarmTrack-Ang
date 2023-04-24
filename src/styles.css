@@ -2,5 +2,7 @@
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('../assets/Montserrat.ttf');
+    src: url('assets/Montserrat.ttf');
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
