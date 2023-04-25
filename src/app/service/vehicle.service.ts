@@ -36,7 +36,7 @@ export class VehicleService {
     return this.http.delete<any>(url);
   }
 
-  getVehiclesStats(vehicle_id: number): Observable<any> {
+  getVehicleStats(vehicle_id: number): Observable<any> {
     const url = `${this.baseUrl + 'stats'}/${vehicle_id}`;
     return this.http.get<any>(url);
   }

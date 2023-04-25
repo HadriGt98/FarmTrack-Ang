@@ -11,6 +11,7 @@ import { AdminGuardGuard as AdminGuard } from './guard/admin-guard.guard';
 import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
 import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
 import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
+import { EditUsageComponent } from './edit-usage/edit-usage.component';
 
 
 // add adminguard where necessary
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'new-vehicle', component: NewVehicleComponent, canActivate: [AuthGuard, AdminGuard]},
   {path:'show-vehicle/:vehicle_id', component: ShowVehicleComponent, canActivate: [AuthGuard]},
   {path:'edit-vehicle/:vehicle_id', component: EditVehicleComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: 'edit-usage/:usage_id', component: EditUsageComponent, canActivate: [AuthGuard, AdminGuard]},
   {path:'', redirectTo: '/login', pathMatch: 'full'},
   {path:'register', component: RegisterComponent},
   { path: '**', component: PagenotfoundComponent }, // wildcard route

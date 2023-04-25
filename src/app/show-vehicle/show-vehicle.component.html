@@ -1,3 +1,35 @@
 <p>show-vehicle works!</p>
 <h2>Vehicle Model Make: {{ vehicle.model_make }}</h2>
 <a class="button" routerLink="/edit-vehicle/{{ vehicle.vehicle_id }}">Edit</a>
+
+<mat-card>
+    <mat-card-content>
+        Fuel expenses : {{ stats.total_minutes }}
+        Minutes used : {{ stats.total_fuel_cost }}
+        Maintenance expenses : {{ stats.total_maintenance_cost }}
+    </mat-card-content>
+</mat-card>
+
+<h2>Usages</h2>
+<mat-card>
+    <mat-card-content>
+        <thead>
+            <tr>
+                <th>date</th>
+                <th>duration</th>
+                <th>fuel</th>
+                <th>maintenance</th>
+                <th>note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usage of usages">
+                <td><a routerLink="/edit-usage/{{ usage.usage_id }}">{{ usage.date }}</a></td>
+                <td>{{ usage.duration }}</td>
+                <td>{{ usage.fuel_amount }}</td>
+                <td>{{ usage.maintenance_cost }}</td>
+                <td>{{ usage.note }}</td>
+            </tr>
+          </tbody>
+    </mat-card-content>
+</mat-card>

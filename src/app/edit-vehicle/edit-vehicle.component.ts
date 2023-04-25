@@ -70,7 +70,7 @@ export class EditVehicleComponent {
       next: (response:any) => {
         console.log(response);
         this.toastr.success(response.message); // check if this still works...
-        this.router.navigate(['/vehicle-list']); // Navigate to vehicle page
+        this.router.navigate(['/show-vehicle/{{ vehicle.vehicle_id }}']); // Navigate to vehicle page
       },
       error : (error:any) => {
         console.log(error);

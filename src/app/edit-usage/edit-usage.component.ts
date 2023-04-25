@@ -25,6 +25,7 @@ export class EditUsageComponent {
   usage!: any
   vehicles!: any[];
   userId!: number;
+  vehicleId!: any;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -35,29 +36,41 @@ export class EditUsageComponent {
     ) { }
     
     ngOnInit(): void {
-      const id = this.route.snapshot.paramMap.get('usage_id');
-      if (id != null) {
-        this.usage = this.usageService.getUsage((Number(id))).subscribe(
-          (usage: any) => {
-            this.usage = usage;
-            console.log(this.usage);
-            this.updateUsageForm = this.formBuilder.group({
-              vehicle_id: [this.usage.vehicle_id, Validators.required],
-              user_id: [this.usage.user_id, Validators.required],
-              duration: [this.usage.duration, Validators.required],
-              date: [this.usage.date, Validators.required],
-              fuel_amount: [this.usage.fuel_amount, Validators.required],
-              maintenance_cost: [this.usage.maintenance_cost, Validators.required],
-              note: [this.usage.note],
-            });
-          },
-          (error) => {
-            console.log(error);
-          });
-      } else {
-        console.log('Vehicle Id was not found');
+
+    // Fetch vehicle list for dropdown
+    this.vehicleService.getVehicles().subscribe({
+      next: (vehicledata: any) => {
+        this.vehicles = vehicledata;
+      },
+      error: (error: any) => {
+        console.log(error.error.message);
       }
+    });
+
+    const id = this.route.snapshot.paramMap.get('usage_id');
+    if (id != null) {
+      this.usage = this.usageService.getUsage((Number(id))).subscribe(
+        (usage: any) => {
+          this.usage = usage;
+          this.vehicleId = this.usage.vehicle_id;
+          console.log(this.usage);
+          this.updateUsageForm = this.formBuilder.group({
+            vehicle_id: [this.usage.vehicle_id, Validators.required],
+            user_id: [this.usage.user_id, Validators.required],
+            duration: [this.usage.duration, Validators.required],
+            date: [this.usage.date, Validators.required],
+            fuel_amount: [this.usage.fuel_amount, Validators.required],
+            maintenance_cost: [this.usage.maintenance_cost, Validators.required],
+            note: [this.usage.note],
+          });
+        },
+        (error) => {
+          console.log(error);
+        });
+    } else {
+      console.log('Vehicle Id was not found');
     }
+  }
   
     submitUsageUpdate() {
       if(this.updateUsageForm.valid){
