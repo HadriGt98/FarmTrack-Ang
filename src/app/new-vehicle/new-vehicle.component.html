@@ -1,0 +1,19 @@
+<p>new-vehicle works!</p>
+<form [formGroup]="vehicleForm" (ngSubmit)="submitVehicle()">  
+    <label for="model_make">Make and model</label>
+    <input type="text" id="model_make" name="model_make" formControlName="model_make">
+  
+    <label for="nickname">Nickname</label>
+    <input type="text" id="nickname" name="nickname" formControlName="nickname">
+
+    <label for="type">Type</label>
+    <select name="type" id="type" formControlName="type">
+        <option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</option>
+        <!-- <option>Tractor</option>
+        <option>Trailer</option>
+        <option>ATV</option> -->
+      </select>
+    
+    <button type="submit">Save</button>
+    <a class="button" routerLink="/vehicle-list">Cancel</a>
+  </form>

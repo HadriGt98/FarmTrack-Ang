@@ -40,5 +40,4 @@ export class LoginComponent {
       this.toastr.error('The form seems to be emtpy, please fill it out');
     }
   }
-
 }

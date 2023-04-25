@@ -16,4 +16,18 @@ export class AuthService {
       return false;
     }
   }
+
+  public isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      if (decodedToken.is_admin === true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

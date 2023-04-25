@@ -14,6 +14,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './register/register.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NewUsageComponent } from './new-usage/new-usage.component';
+import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
+import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
+import { EditUsageComponent } from './edit-usage/edit-usage.component';
+import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
 
 
 @NgModule({
@@ -23,7 +28,12 @@ import { JwtModule } from '@auth0/angular-jwt';
     LoginComponent,
     VehicleListComponent,
     RegisterComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    NewUsageComponent,
+    NewVehicleComponent,
+    EditVehicleComponent,
+    EditUsageComponent,
+    ShowVehicleComponent
   ],
   imports: [
     BrowserModule,
