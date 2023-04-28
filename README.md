@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
+# Still to do
+
+- Add searchbar to vehicle-list
+- Implement display of search result
+- Add logout function
+- Create header component
+- Do a lot of CSS (mainly with cards)
+- Test everything
+- In FarmTrack API: add deletion of all usages linked to a deleted vehicle
+
+# Other
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
