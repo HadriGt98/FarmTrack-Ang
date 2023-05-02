@@ -19,6 +19,7 @@ import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
 import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 import { EditUsageComponent } from './edit-usage/edit-usage.component';
 import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
           return localStorage.getItem('token');
           },
         }
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

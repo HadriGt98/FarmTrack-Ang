@@ -18,6 +18,7 @@ export class EditVehicleComponent {
   });
   vehicle!: any;
   types_of_vehicles: string[] = ["Tractor", "Harvester", "ATV"];
+  errorMessage!: string;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -56,11 +57,11 @@ export class EditVehicleComponent {
         },
         error : (error:any) => {
           console.log(error);
-          this.toastr.error(error.error.message);
+          this.errorMessage = error.error.message;
         }
       });
     } else {
-      this.toastr.error('Please fill all the required fields');
+      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
     }
   }
 
@@ -74,7 +75,7 @@ export class EditVehicleComponent {
       },
       error : (error:any) => {
         console.log(error);
-        this.toastr.error(error.error.message);
+        this.errorMessage = error.error.message;
       }
     });
   }

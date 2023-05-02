@@ -26,6 +26,7 @@ export class EditUsageComponent {
   vehicles!: any[];
   userId!: number;
   vehicleId!: any;
+  errorMessage!: string;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -43,6 +44,7 @@ export class EditUsageComponent {
         this.vehicles = vehicledata;
       },
       error: (error: any) => {
+        this.errorMessage = error.error.message;
         console.log(error.error.message);
       }
     });
@@ -68,7 +70,8 @@ export class EditUsageComponent {
           console.log(error);
         });
     } else {
-      console.log('Vehicle Id was not found');
+      this.errorMessage = 'Usage Id was not found';
+      console.log('Usage Id was not found');
     }
   }
   
@@ -82,11 +85,11 @@ export class EditUsageComponent {
           },
           error : (error:any) => {
             console.log(error);
-            this.toastr.error(error.error.message);
+            this.errorMessage = error.error.message;
           }
         });
       } else {
-        this.toastr.error('Please fill all the required fields');
+        this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
       }
     }
   
@@ -100,7 +103,7 @@ export class EditUsageComponent {
         },
         error : (error:any) => {
           console.log(error);
-          this.toastr.error(error.error.message);
+          this.errorMessage = error.error.message;
         }
       });
     }

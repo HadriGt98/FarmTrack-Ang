@@ -4,13 +4,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Still to do
 
-- Add searchbar to vehicle-list
-- Implement display of search result
-- Add logout function
-- Create header component
+- ~~Add searchbar to vehicle-list~~
+- ~~Implement display of search result~~
+- ~~Add logout function~~
 - Do a lot of CSS (mainly with cards)
+- Create header component (and add everywhere)
+- Create footer component (and add everywhere)
 - Test everything
-- In FarmTrack API: add deletion of all usages linked to a deleted vehicle
+
+- In FarmTrack API: add deletion of all usages linked to a deleted vehicle (LAST)
+- Add error popup for successful (failed?) registration, vehicle deletion, etc.
+- Check navigation
+- Mark required fields in forms
+- Make amounts positive only in forms (et voir si c'est bon aussi dans l'API)
+- Add no results found message in search results
+- Add larger note field in usage form
+- Highlight empty fields in forms
 
 # Other
 

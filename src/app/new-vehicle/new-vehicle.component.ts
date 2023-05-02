@@ -13,6 +13,7 @@ export class NewVehicleComponent {
 
   vehicleForm!: FormGroup;
   vehicles: any[] = ["Tractor", "Harvester", "ATV"];
+  errorMessage!: string;
 
   constructor(
     private builder: FormBuilder, 
@@ -43,11 +44,11 @@ export class NewVehicleComponent {
         },
         error : (error:any) => {
           console.log(error);
-          this.toastr.error(error.error.message);
+          this.errorMessage = error.error.message;
         }
       });
     } else {
-      this.toastr.error('Please fill all the required fields');
+      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
     }
   }
 

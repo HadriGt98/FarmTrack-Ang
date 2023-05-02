@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private builder: FormBuilder, private toastr: ToastrService, private service: UserService, private router: Router) {
+  errorMessage!: string;
+
+  constructor(private builder: FormBuilder, private service: UserService, private router: Router) {
 
   }
   
@@ -27,17 +30,16 @@ export class LoginComponent {
       this.service.loginUser(this.loginform.value).subscribe({
         next: (response:any) => {
           console.log(response);
-          // this.toastr.success('Login successful');
           localStorage.setItem('token', response.token)
           this.router.navigate(['/home']);
         },
         error : (error:any) => {
           console.log(error);
-          this.toastr.error(error.error.message /*'Registration failed'*/);
+          this.errorMessage = error.error.message;
         }
       });
     } else {
-      this.toastr.error('The form seems to be emtpy, please fill it out');
+      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
     }
   }
 }

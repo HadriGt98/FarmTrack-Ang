@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
+  errorMessage!: string;
+
 constructor(private builder: FormBuilder, private toastr: ToastrService, private service: UserService, private router: Router) {
 
 }
@@ -34,12 +36,11 @@ submitRegistration(){
       },
       error : (error:any) => {
         console.log(error);
-        this.toastr.error(error.error.message);
+        this.errorMessage = error.error.message;
       }
     });
   } else {
-    this.toastr.error('Please fill all the required fields');
+    this.errorMessage = 'Some required fields seem to be emtpy, please fill them out';
   }
 }
-
 }
