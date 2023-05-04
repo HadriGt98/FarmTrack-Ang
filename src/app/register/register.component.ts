@@ -31,7 +31,7 @@ submitRegistration(){
     this.service.registerUser(this.registerform.value).subscribe({
       next: (response:any) => {
         console.log(response);
-        // this.toastr.success('Registration successful');
+        this.toastr.success('Registration successful');
         this.router.navigate(['/login']);
       },
       error : (error:any) => {
@@ -40,7 +40,7 @@ submitRegistration(){
       }
     });
   } else {
-    this.errorMessage = 'Some required fields seem to be emtpy, please fill them out';
+    this.errorMessage = 'Some required fields seem to be emtpy or have the wrong format, please fill them out';
   }
 }
 }

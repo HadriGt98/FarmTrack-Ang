@@ -18,6 +18,7 @@ export class NewUsageComponent {
   vehicles!: any[];
   userId!: number;
   errorMessage!: string;
+  previousPage: string = '/home';
 
   constructor(
     private builder: FormBuilder, 
@@ -34,10 +35,10 @@ export class NewUsageComponent {
     this.usageForm = this.builder.group({
       vehicle_id:this.builder.control('',Validators.required),
       user_id:this.builder.control(''),
-      duration:this.builder.control('',Validators.required),
+      duration:this.builder.control('',Validators.compose([Validators.required, Validators.min(0)])),
       date:this.builder.control('',Validators.required),
-      fuel_amount:this.builder.control('', Validators.required, /*Validators.pattern('^[0-9]*$')*/),
-      maintenance_cost:this.builder.control('', Validators.required, /*Validators.pattern('^[0-9]*$')*/),
+      fuel_amount:this.builder.control('', Validators.compose([Validators.required, Validators.min(0)]), /*Validators.pattern('^[0-9]*$')*/),
+      maintenance_cost:this.builder.control('', Validators.compose([Validators.required, Validators.min(0)]), /*Validators.pattern('^[0-9]*$')*/),
       note:this.builder.control('')
   });
 
@@ -68,7 +69,8 @@ export class NewUsageComponent {
         next: (response:any) => {
           console.log(response);
           this.toastr.success('Usage created successfuly');
-          // this.router.navigate(['/login']); Navigate to vehicle page
+          let route: string = '/show-vehicle/' + this.usageForm.value.vehicle_id;
+          this.router.navigate([route]); // Navigate to vehicle page
         },
         error : (error:any) => {
           console.log(error);
@@ -76,7 +78,7 @@ export class NewUsageComponent {
         }
       });
     } else {
-      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
+      this.errorMessage = 'Some fields seem to be emtpy or have the wrong format, please fill them out';
     }
   }
 

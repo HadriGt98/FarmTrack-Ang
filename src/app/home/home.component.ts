@@ -9,6 +9,8 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent {
 
+  previousPage: string = '/home';
+
   constructor (private service:UserService) {}
 
   username = this.service.getUsername();

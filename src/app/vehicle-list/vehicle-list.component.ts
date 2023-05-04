@@ -1,3 +1,4 @@
+import { AuthService } from './../service/auth.service';
 import { Component } from '@angular/core';
 import { VehicleService } from '../service/vehicle.service';
 
@@ -11,21 +12,12 @@ export class VehicleListComponent {
   vehicles: any[] = [];
   // filteredVehicles: any[] = [];
   searchText!: string;
+  previousPage: string = '/home';
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getVehicles();
-
-    // Keep this code for reference!!!
-    // this.vehicleService.getVehicles().subscribe({
-    //   next: (vehicledata: any) => {
-    //     this.vehicles = vehicledata;
-    //   },
-    //   error: (error: any) => {
-    //     console.log(error.error.message);
-    //   }
-    // });
   }
 
   getVehicles(): void {
@@ -52,6 +44,10 @@ export class VehicleListComponent {
     } else {
       this.getVehicles();
     }
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
 }

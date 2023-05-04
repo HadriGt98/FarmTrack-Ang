@@ -12,6 +12,7 @@ import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
 import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
 import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 import { EditUsageComponent } from './edit-usage/edit-usage.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 // add adminguard where necessary
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'edit-usage/:usage_id', component: EditUsageComponent, canActivate: [AuthGuard, AdminGuard]},
   {path:'', redirectTo: '/login', pathMatch: 'full'},
   {path:'register', component: RegisterComponent},
-  { path: '**', component: PagenotfoundComponent }, // wildcard route
+  {path:'forbidden', component: ForbiddenComponent},
+  {path: '**', component: PagenotfoundComponent}, // wildcard route
 ];
 
 @NgModule({

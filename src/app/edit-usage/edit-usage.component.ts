@@ -27,6 +27,7 @@ export class EditUsageComponent {
   userId!: number;
   vehicleId!: any;
   errorMessage!: string;
+  previousPage!: string;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -55,14 +56,15 @@ export class EditUsageComponent {
         (usage: any) => {
           this.usage = usage;
           this.vehicleId = this.usage.vehicle_id;
+          this.previousPage = '/show-vehicle/' + this.vehicleId;
           console.log(this.usage);
           this.updateUsageForm = this.formBuilder.group({
             vehicle_id: [this.usage.vehicle_id, Validators.required],
             user_id: [this.usage.user_id, Validators.required],
-            duration: [this.usage.duration, Validators.required],
+            duration: [this.usage.duration, Validators.compose([Validators.required, Validators.min(0)])],
             date: [this.usage.date, Validators.required],
-            fuel_amount: [this.usage.fuel_amount, Validators.required],
-            maintenance_cost: [this.usage.maintenance_cost, Validators.required],
+            fuel_amount: [this.usage.fuel_amount, Validators.compose([Validators.required, Validators.min(0)])],
+            maintenance_cost: [this.usage.maintenance_cost, Validators.compose([Validators.required, Validators.min(0)])],
             note: [this.usage.note],
           });
         },
@@ -81,7 +83,8 @@ export class EditUsageComponent {
           next: (response:any) => {
             console.log(response);
             this.toastr.success('Vehicle updated successfuly');
-            this.router.navigate(['/vehicle-list']); // Navigate to vehicle page
+            let route: string = '/show-vehicle/' + this.vehicleId;
+            this.router.navigate([route]); // Navigate to vehicle page
           },
           error : (error:any) => {
             console.log(error);
@@ -89,7 +92,7 @@ export class EditUsageComponent {
           }
         });
       } else {
-        this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
+        this.errorMessage = 'Some fields seem to be emtpy or have the wrong format, please fill them out';
       }
     }
   
@@ -99,7 +102,8 @@ export class EditUsageComponent {
         next: (response:any) => {
           console.log(response);
           this.toastr.success(response.message); // check if this still works...
-          this.router.navigate(['/vehicle-list']); // Navigate to vehicle page
+          let route: string = '/show-vehicle/' + this.vehicleId;
+          this.router.navigate([route]); // Navigate to vehicle page
         },
         error : (error:any) => {
           console.log(error);

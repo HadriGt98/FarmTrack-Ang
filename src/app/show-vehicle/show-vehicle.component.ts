@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VehicleService } from '../service/vehicle.service';
 import { UsageService } from '../service/usage.service';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-vehicle',
@@ -13,11 +15,14 @@ export class ShowVehicleComponent {
   vehicle!: any;
   stats!: any;
   usages!: any[]
+  previousPage: string = '/vehicle-list';
 
   constructor(
     private route: ActivatedRoute, 
     private vehicleService: VehicleService,
-    private usageService: UsageService
+    private usageService: UsageService,
+    private authService: AuthService,
+    private router: Router
     ) { 
     const id = this.route.snapshot.paramMap.get('vehicle_id');
     if (id != null) {
@@ -44,5 +49,12 @@ export class ShowVehicleComponent {
     }
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  seeUsage(usage_id: number) {
+    this.router.navigate(['/edit-usage/' + usage_id]);
+  }
 
 }

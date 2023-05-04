@@ -1,30 +1,37 @@
-<p>vehicle-list works!</p>
-<a class="button" routerLink="/new-vehicle">Add Vehicle</a>
+<app-header [previousPage]="previousPage"></app-header>
+<div class="center">
+  <h2>All vehicles</h2>
+</div>
 
-<div class="container">
-    <h1>Vehicle List</h1>
-    <div class="row">
-      <div class="col-md-4">
-        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" (input)="searchVehicles()">
-      </div>
+<div class="center">
+  <input type="text" class="form-control" placeholder="Enter a make or a model" [(ngModel)]="searchText" (input)="searchVehicles()">
+</div>
+
+<div class="content center">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+    fxFlex="33%" 
+    fxFlex.xs="100%"
+    fxFlex.sm="33%"
+    *ngIf="isAdmin()">
+        <mat-card class="add" routerLink="/new-vehicle">
+          <mat-card-content>
+            <span class="material-symbols-outlined">add_circle</span>
+          </mat-card-content>
+        </mat-card>
     </div>
-    <br>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>model/make</th>
-          <th>nickname</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let vehicle of vehicles">
-          <td>{{ vehicle.vehicle_id }}</td>
-          <td><a routerLink="/show-vehicle/{{ vehicle.vehicle_id }}">{{ vehicle.model_make }}</a></td>
-          <td>{{ vehicle.nickname }}</td>
-          <td>{{ vehicle.type }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div 
+      fxFlex="33%" 
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let vehicle of vehicles">
+      <mat-card routerLink="/show-vehicle/{{ vehicle.vehicle_id }}">
+        <mat-card-content>
+          <h3>{{ vehicle.nickname }}</h3>
+          <p>{{ vehicle.model_make }}</p>
+          <p>{{ vehicle.type }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
+</div>

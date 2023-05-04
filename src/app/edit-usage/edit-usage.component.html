@@ -1,3 +1,4 @@
+<app-header [previousPage]="previousPage"></app-header>
 <div>
   <h2>Edit usage</h2>
 </div>
@@ -20,11 +21,11 @@
       <input type="date" id="date" name="date" formControlName="date">
     </div>
     <div class="form">
-      <label for="fuel_amount">Fuel amount</label>
+      <label for="fuel_amount">Fuel amount*</label>
       <input type="number" id="fuel_amount" name="fuel_amount" placeholder="in EUR" formControlName="fuel_amount">
     </div>
     <div class="form">
-      <label for="maintenance_cost">Maintenance amount</label>
+      <label for="maintenance_cost">Maintenance amount*</label>
       <input type="number" id="maintenance_cost" name="maintenance_cost" placeholder="in EUR" formControlName="maintenance_cost">
     </div>
     <div class="form">

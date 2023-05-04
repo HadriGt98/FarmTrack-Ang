@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -20,7 +20,10 @@ import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 import { EditUsageComponent } from './edit-usage/edit-usage.component';
 import { ShowVehicleComponent } from './show-vehicle/show-vehicle.component';
 import { FormsModule } from '@angular/forms';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +37,13 @@ import { FormsModule } from '@angular/forms';
     NewVehicleComponent,
     EditVehicleComponent,
     EditUsageComponent,
-    ShowVehicleComponent
+    ShowVehicleComponent,
+    ForbiddenComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -51,7 +58,8 @@ import { FormsModule } from '@angular/forms';
           },
         }
     }),
-    FormsModule
+    FormsModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

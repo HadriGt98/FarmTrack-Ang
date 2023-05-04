@@ -14,6 +14,7 @@ export class NewVehicleComponent {
   vehicleForm!: FormGroup;
   vehicles: any[] = ["Tractor", "Harvester", "ATV"];
   errorMessage!: string;
+  previousPage: string = '/vehicle-list';
 
   constructor(
     private builder: FormBuilder, 
@@ -48,7 +49,7 @@ export class NewVehicleComponent {
         }
       });
     } else {
-      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
+      this.errorMessage = 'Some fields seem to be emtpy or have the wrong format, please fill them out';
     }
   }
 

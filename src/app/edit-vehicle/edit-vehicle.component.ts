@@ -19,6 +19,7 @@ export class EditVehicleComponent {
   vehicle!: any;
   types_of_vehicles: string[] = ["Tractor", "Harvester", "ATV"];
   errorMessage!: string;
+  previousPage!: string;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -32,6 +33,7 @@ export class EditVehicleComponent {
       this.vehicle = this.vehicleService.getVehicle((Number(id))).subscribe(
         (vehicle: any) => {
           this.vehicle = vehicle;
+          this.previousPage = '/show-vehicle/' + this.vehicle.vehicle_id;
           console.log(this.vehicle);
           this.updateVehicleForm = this.formBuilder.group({
             model_make: [this.vehicle.model_make, Validators.required],
@@ -53,7 +55,8 @@ export class EditVehicleComponent {
         next: (response:any) => {
           console.log(response);
           this.toastr.success('Vehicle updated successfuly');
-          this.router.navigate(['/vehicle-list']); // Navigate to vehicle page
+          let route = '/show-vehicle/' + this.vehicle.vehicle_id;
+          this.router.navigate([route]); // Navigate to vehicle page
         },
         error : (error:any) => {
           console.log(error);
@@ -61,7 +64,7 @@ export class EditVehicleComponent {
         }
       });
     } else {
-      this.errorMessage = 'Some fields seem to be emtpy, please fill them out';
+      this.errorMessage = 'Some fields seem to be emtpy or have the wrong format, please fill them out';
     }
   }
 
@@ -71,7 +74,7 @@ export class EditVehicleComponent {
       next: (response:any) => {
         console.log(response);
         this.toastr.success(response.message); // check if this still works...
-        this.router.navigate(['/show-vehicle/{{ vehicle.vehicle_id }}']); // Navigate to vehicle page
+        this.router.navigate(['/vehicle-list']); // Navigate to vehicle page
       },
       error : (error:any) => {
         console.log(error);
