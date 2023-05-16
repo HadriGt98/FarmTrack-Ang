@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { JwtHelperService as jwtHelper } from '@auth0/angular-jwt';
 import { UserService } from '../service/user.service';
 
 @Component({
