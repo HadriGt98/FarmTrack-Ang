@@ -11,7 +11,7 @@ export class VehicleService {
 
   baseUrl = 'http://localhost:3000/api/';
 
-  constructor( private http: HttpClient, private router:Router, private jwtHelper:JwtHelperService ) { }
+  constructor( private http: HttpClient ) {}
 
   getVehicles(): Observable<any> {
     return this.http.get(this.baseUrl + 'vehicles');
@@ -43,7 +43,7 @@ export class VehicleService {
 
   searchVehicles(search: string): Observable<any> {
     const url = `${this.baseUrl + 'search/vehicles?model_make=' + search}`;
-    console.log('URL: ', url)
+    // console.log('URL: ', url)
     return this.http.get<any>(url);
   }
 }

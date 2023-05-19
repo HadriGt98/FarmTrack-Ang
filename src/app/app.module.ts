@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module'
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthInterceptor } from './service/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

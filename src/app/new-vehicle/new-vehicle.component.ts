@@ -28,7 +28,7 @@ export class NewVehicleComponent {
     // create a form group
     this.vehicleForm = this.builder.group({
       model_make: this.builder.control('',Validators.required),
-      nickname: this.builder.control(''),
+      nickname: this.builder.control('',Validators.required),
       type: this.builder.control('',Validators.required),
   });
 
