@@ -3,9 +3,15 @@
   <h2>All vehicles</h2>
 </div>
 
+<!-- THIS CODE FOR API SEARCH - Check code below -->
 <div class="center">
-  <input type="text" class="form-control" placeholder="Enter a make or a model" [(ngModel)]="searchText" (input)="searchVehicles()">
+  <input type="text" class="form-control" placeholder="Enter a make or a model" [(ngModel)]="searchText" (keyup)="onKeyUp($event)">
 </div>
+
+<!-- THIS CODE FOR FILTERING - Check code below -->
+<!-- <div class="center">
+  <input type="text" class="form-control" placeholder="Enter a make or a model" [(ngModel)]="searchText" (keyup)="onKeyUpFilter($event)">
+</div> -->
 
 <div class="content center">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -20,6 +26,21 @@
           </mat-card-content>
         </mat-card>
     </div>
+    <!-- THIS CODE FOR API SEARCH - Check search bar above -->
+    <div 
+      fxFlex="33%" 
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngIf="displayNoResultsMessage"
+      class="no-results">
+      <mat-card>
+        <mat-card-content>
+          <h3 >Sorry</h3>
+          <p>No result found</p>
+          <p>Try another search!</p>
+        </mat-card-content>
+      </mat-card>
+    </div> 
     <div 
       fxFlex="33%" 
       fxFlex.xs="100%"
@@ -33,5 +54,37 @@
         </mat-card-content>
       </mat-card>
     </div>
+
+    <!-- THIS CODE FOR FILTERING - Check search bar above -->
+    <!-- <div 
+      fxFlex="33%" 
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngIf="filteredVehicles.length === 1 && filteredVehicles[0].noResult" class="no-results">
+      <mat-card>
+        <mat-card-content>
+          <h3>Sorry</h3>
+          <p>No result found</p>
+          <p>Try another search!</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div 
+      fxFlex="33%" 
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let vehicle of filteredVehicles">
+      <ng-container *ngIf="!vehicle.noResult">
+        <mat-card routerLink="/show-vehicle/{{ vehicle.vehicle_id }}">
+          <mat-card-content>
+            <h3>{{ vehicle.nickname }}</h3>
+            <p>{{ vehicle.model_make }}</p>
+            <p>{{ vehicle.type }}</p>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div> -->
+
+
   </div>
 </div>

@@ -25,7 +25,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - Change API call for lookup
 - Add "no vehicle found" to lookup
-- Add something ??? (j'ai oublié ce que je voulais écrire)
 - Add larger note field in usage form
 - Sort by farming date (not by creation)
 

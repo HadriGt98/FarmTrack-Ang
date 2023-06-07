@@ -10,8 +10,10 @@ import { VehicleService } from '../service/vehicle.service';
 export class VehicleListComponent {
 
   vehicles: any[] = [];
-  // filteredVehicles: any[] = [];
-  searchText!: string;
+  enterKeyPressed: boolean = false;
+  displayNoResultsMessage: boolean = false;
+  filteredVehicles: any[] = [];
+  searchText: string = "";
   previousPage: string = '/home';
 
   constructor(private vehicleService: VehicleService, private authService: AuthService) { }
@@ -24,6 +26,7 @@ export class VehicleListComponent {
     this.vehicleService.getVehicles().subscribe({
       next: (vehicledata: any) => {
             this.vehicles = vehicledata;
+            this.filteredVehicles = this.vehicles; // only for filtering
           },
           error: (error: any) => {
             console.log(error.error.message);
@@ -32,17 +35,57 @@ export class VehicleListComponent {
   }
 
   searchVehicles(): void {
-    if (this.searchText) {
+    if (this.searchText && this.enterKeyPressed) {
       this.vehicleService.searchVehicles(this.searchText).subscribe(
         (vehicledata: any) => {
-          this.vehicles = vehicledata;
+          if (vehicledata.length > 0) {
+            this.vehicles = vehicledata;
+          } else {
+            this.displayNoResultsMessage = true;
+            this.vehicles = [];
+          }
         },
         (error: any) => {
-          console.log(error.error.message);
+          if (error.status === 404) {
+            this.displayNoResultsMessage = true;
+            this.vehicles = [];
+          } else {
+            console.log(error.error.message);
+          }
         }
-      )
+      );
     } else {
       this.getVehicles();
+    }
+  }
+
+  onKeyUp(event: KeyboardEvent): void {
+    this.enterKeyPressed = event.keyCode === 13;
+    if (this.enterKeyPressed) {
+      this.searchVehicles();
+    } else {
+      this.displayNoResultsMessage = false;
+    }
+  }
+
+  onKeyUpFilter(event: KeyboardEvent): void {
+    this.enterKeyPressed = event.keyCode === 13;
+    if (this.enterKeyPressed) {
+      if (this.searchText) {
+        this.filteredVehicles = this.vehicles.filter(vehicle => {
+          // Perform the filtering logic based on your requirements
+          return (
+            vehicle.model_make.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            vehicle.nickname.toLowerCase().includes(this.searchText.toLowerCase())
+          );
+        });
+      } else {
+        this.filteredVehicles = this.vehicles;
+      }
+      // Display message when there are no search results
+      if (this.filteredVehicles.length === 0) {
+        this.filteredVehicles.push({ noResult: true });
+      }
     }
   }
 

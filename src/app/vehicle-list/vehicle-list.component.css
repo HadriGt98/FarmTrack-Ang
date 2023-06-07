@@ -93,3 +93,7 @@ div.content {
 input[type='text'] {
     text-align: justify;
     }
+
+.no-results {
+    color: #b80101;
+}
